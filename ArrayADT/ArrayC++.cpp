@@ -1,37 +1,36 @@
 #include<stdio.h>
 #include<iostream>
 using namespace std;
-
+template<class T>
 class Array{
 	private:
-//	public:
-		int *A;
+		T *A;
 		int size;
 		int length=0;
-		void swap(int *a1, int *a2);
+		void swap(T *a1, T *a2);
 	public:
 		Array(int sz){
 			size=sz;
-			A=new int[size];
+			A=new T[size];
 		}
 		Array(){
 			size=20;
-			A=new int[size];
+			A=new T[size];
 		}
 		void Display();
-		void append(int x);
-		void Insert(int index, int x);
-		int Delete(int index);
-		int linearSearch(int key);
-		int binarySearch(int key);
-		int binarySearchR(int l, int h, int key);
-		int get(int index);
-		void set(int index, int x);
-		int Sum();
-		int Max();
-		int Min();
-		int Avg();
-		int Sum(int n);
+		void append(T x);
+		void Insert(int index, T x);
+		T Delete(int index);
+		T linearSearch(T key);
+		T binarySearch(T key);
+		T binarySearchR(int l, int h, T key);
+		T get(int index);
+		void set(int index, T x);
+		T Sum();
+		T Max();
+		T Min();
+		T Avg();
+		T Sum(int n);
 		void Reverse();
 		bool isSorted();
 		void negativeOnLeftside();
@@ -43,18 +42,18 @@ class Array{
 			delete(A);
 		}
 };
-
-void Array::Display(){
+template<class T>
+void Array<T>::Display(){
 	for(int i=0;i<length;i++)
-		printf("%d ",A[i]);
+		cout<<A[i]<<"\t";
 	cout<<endl;
 }
-
-void Array::append(int x){
+template<class T>
+void Array<T>::append(T x){
 	A[length++]=x;
 }
-
-void Array::Insert(int index, int x){
+template<class T>
+void Array<T>::Insert(int index, T x){
 	if(index>=0 && index<=length){
 		int i=length;
 		for(;i>index;i--){
@@ -64,8 +63,8 @@ void Array::Insert(int index, int x){
 		length++;
 	}
 }
-
-int Array::Delete(int index){
+template<class T>
+T Array<T>::Delete(int index){
 	if(index>=0 && index<=length){
 		int x=A[index];
 		for(int i=index;i<length;i++){
@@ -75,16 +74,16 @@ int Array::Delete(int index){
 		return x;
 	}
 }
-
-int Array::linearSearch(int key){
+template<class T>
+T Array<T>::linearSearch(T key){
 	for(int i=0;i<length;i++){
 		if(key==A[i])
 			return i;
 	}
 	return -1;
 }
-
-int Array::binarySearch(int key){
+template<class T>
+T Array<T>::binarySearch(T key){
 	int l=0,h=length-1,mid;
 	while(l<=h){
 		mid=(l+h)/2;
@@ -97,8 +96,8 @@ int Array::binarySearch(int key){
 	}
 	return -1;
 }
-
-int Array::binarySearchR(int l, int h, int key){
+template<class T>
+T Array<T>::binarySearchR(int l, int h, T key){
  	int mid;
 	while(l<=h){
 	mid=(l+h)/2;
@@ -111,28 +110,28 @@ int Array::binarySearchR(int l, int h, int key){
 	}
 	return -1;
 }
-
-int Array::get(int index){
+template<class T>
+T Array<T>::get(int index){
 	if(index>=0 && index<length){
 		return A[index];
 	}
 	return -1;
 }
-
-void Array::set(int index, int x){
+template<class T>
+void Array<T>::set(int index, T x){
 	if(index>=0 && index<length){
 		A[index]=x;
 	}
 }
-
-int Array::Sum(){
+template<class T>
+T Array<T>::Sum(){
 	int sum=0;
 	for(int i=0;i<length;i++)
 		sum+=A[i];
 	return sum;
 }
-
-int Array::Max(){
+template<class T>
+T Array<T>::Max(){
 	int max=A[0];
 	for(int i=0;i<length;i++){
 		if(max<A[i])
@@ -140,8 +139,8 @@ int Array::Max(){
 	}
 	return max;
 }
-
-int Array::Min(){
+template<class T>
+T Array<T>::Min(){
 	int min=A[0];
 	for(int i=0;i<length;i++){
 		if(min>A[i])
@@ -149,40 +148,40 @@ int Array::Min(){
 	}
 	return min;
 }
-
-int Array::Avg(){
+template<class T>
+T Array<T>::Avg(){
 	return Sum()/length;
 }
-
-int Array::Sum(int n){
+template<class T>
+T Array<T>::Sum(int n){
 	if(n<=0){
 		return 0;
 	}
 	return Sum(n-1)+A[n-1];
 }
-
-void Array::swap(int *a1, int *a2){
-	int temp=*a1;
+template<class T>
+void Array<T>::swap(T *a1, T *a2){
+	T temp=*a1;
 	*a1=*a2;
 	*a2=temp;
 }
-
-void Array::Reverse(){
+template<class T>
+void Array<T>::Reverse(){
 	int i=0,j=length-1;
 	for(;i<j;i++,j--){
 		swap(&A[i],&A[j]);
 	}
 }
-
-bool Array::isSorted(){
+template<class T>
+bool Array<T>::isSorted(){
 	for(int i=0;i<length-1;i++){
 		if(A[i]>A[i+1])
 			return false;
 	}
 	return true;
 }
-
-void Array::negativeOnLeftside(){
+template<class T>
+void Array<T>::negativeOnLeftside(){
 	int i=0,j=length-1;
 	while(i<j){
 		if(A[i]>=0 && A[j]<0){
@@ -195,8 +194,8 @@ void Array::negativeOnLeftside(){
 			j--;
 	}
 }
-
-void Array::Merge(Array a2,Array *a3){
+template<class T>
+void Array<T>::Merge(Array a2,Array *a3){
 	int i=0,j=0,k=0;
 	while(i<length && j<a2.length){
 		if(A[i] < a2.A[j]){
@@ -214,8 +213,8 @@ void Array::Merge(Array a2,Array *a3){
 		
 	a3->length=k;	
 }
-
-void Array::Union(Array a2,Array *a3){
+template<class T>
+void Array<T>::Union(Array a2,Array *a3){
 	int i=0,j=0,k=0;
 	while(i<length && j<a2.length){
 		if(A[i] < a2.A[j]){
@@ -236,8 +235,8 @@ void Array::Union(Array a2,Array *a3){
 	
 	a3->length=k;	
 }
-
-void Array::Intersection(Array a2,Array *a3){
+template<class T>
+void Array<T>::Intersection(Array a2,Array *a3){
 	int i=0,j=0,k=0;
 
 	while(i<length && j<a2.length){
@@ -255,8 +254,8 @@ void Array::Intersection(Array a2,Array *a3){
 	
 	a3->length=k;
 }
-
-void Array::Difference(Array a2, Array *a3){
+template<class T>
+void Array<T>::Difference(Array a2, Array *a3){
 	int i=0,j=0,k=0;
 
 	while(i<length && j<a2.length){
@@ -275,9 +274,9 @@ void Array::Difference(Array a2, Array *a3){
 }
 
 int main(){
-	Array a1(10);
-	Array a2(10);
-	Array a3;
+	Array<int> a1(10);
+	Array<int> a2(10);
+	Array<int> a3;
 	a1.append(10);
 	a1.append(20);
 	a1.append(22);
@@ -286,5 +285,15 @@ int main(){
 	
 	a1.Difference(a2,&a3);
 	a3.Display();
+	
+	Array<char> a4(10);
+	a4.append('a');
+	a4.append('b');
+	a4.Display();
+	
+	Array<float> a5(10);
+	a5.append(10.23);
+	a5.append(2.55);
+	a5.Display();
 	return 0;
 }
